@@ -1,14 +1,36 @@
+import java.nio.file.Paths;
+import java.io.IOException;
 import java.util.Date;
+import java.util.Scanner;
 
 public class OrderApplication {
 
 	public static void main(String[] args) {
-		Customer customer = new Customer("name", "address", 1.2, 3.4);
-		Order order = new Order(customer, 23, new Date());
 		System.out.println("OrderApplication");
-		Product product = new Product("name", 2.3, 2);
-		System.out.println(product.getName());
-		OrderLine line = order.addOrderLine(product, 23);
-		System.out.println(line.calculatePrice());
+		ProductCatalogue catalogue = new ProductCatalogue();
+		populateCatalogue(catalogue);
+		System.out.println("Catalogue Products:");
+		for (int i = 0; i < catalogue.size(); i++) {
+			Product product = catalogue.get(i);
+			System.out.println(product.getId() + ": " + product.getName() + "; $" + product.getPrice());
+		}
+	}
+	
+	public static void populateCatalogue(ProductCatalogue catalogue) {
+		try {
+			Scanner in = new Scanner(Paths.get("Data.txt"));
+			while(in.hasNextLine()) {
+				String[] str = in.nextLine().split("\\|");
+				int productId = Integer.parseInt(str[0]);
+				String name = str[1];
+				double price = Double.parseDouble(str[2]);
+				Product product = new Product(name, price, productId);
+				catalogue.add(product);
+			}
+			in.close();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }
