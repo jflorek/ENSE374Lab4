@@ -46,4 +46,13 @@ public class Order {
 	public Date getDateReceived() {
 		return this.dateReceived;
 	}
+	
+	public double calculatePrice() {
+		double price = 0;
+		for (int i = 0; i < orderLines.size(); i++) {
+			price += orderLines.get(i).calculatePrice();
+		}
+		price *= getCustomer().getDiscountRating();
+		return price;
+	}
 }

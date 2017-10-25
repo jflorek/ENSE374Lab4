@@ -11,5 +11,4 @@ public class OrderApplication {
 		OrderLine line = order.addOrderLine(product, 23);
 		System.out.println(line.calculatePrice());
 	}
-
 }
