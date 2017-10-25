@@ -5,6 +5,8 @@ public class OrderApplication {
 		Product product = new Product("name", 2.3, 2);
 		System.out.println(product.getName());
 		Customer customer = new Customer("name", "address", 1.2, 3.4);
+		OrderLine line = new OrderLine(product, 2);
+		System.out.println(line.calculatePrice());
 	}
 
 }
