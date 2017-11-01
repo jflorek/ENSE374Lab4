@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Date;
+import java.io.PrintStream;
 
 public class Order {
 	private class PrivateOrderLine extends OrderLine{
@@ -54,5 +55,12 @@ public class Order {
 		}
 		price *= getCustomer().getDiscountRating();
 		return price;
+	}
+	
+	public void printDetails(PrintStream out) {
+		out.println("Order " + getOrderId() + " Contents:");
+		for (Iterator<OrderLine> it = getOrderLines(); it.hasNext(); out.println(it.next().getDetails()));
+		out.println(getCustomer().getName() + " discount rating: " + getCustomer().getDiscountRating());
+		out.println("Final price: $" + calculatePrice());
 	}
 }

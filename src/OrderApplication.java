@@ -22,14 +22,7 @@ public class OrderApplication {
 		Order order = new Order(customer, 1, new Date());
 		populateOrder(order, catalogue);
 		System.out.println();
-		System.out.println("Order Contents:");
-		for (Iterator<OrderLine> it = order.getOrderLines(); it.hasNext();) {
-			System.out.println(it.next().getDetails());
-		}
-		System.out.println();
-		System.out.println("Customer '" + order.getCustomer().getName() + "' has discount rating of " + order.getCustomer().getDiscountRating() + ".");
-		double finalPrice = order.calculatePrice();
-		System.out.println("Final price: $" + finalPrice);
+		order.printDetails(System.out);
 	}
 	
 	public static void populateCatalogue(ProductCatalogue catalogue) {
