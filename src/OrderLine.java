@@ -19,4 +19,8 @@ public class OrderLine {
 	public double calculatePrice() {
 		return getQuantity() * getProduct().getPrice();
 	}
+	
+	public String getDetails() {
+		return getQuantity() + "x " + getProduct().getName() + "(s): total $" + calculatePrice();
+	}
 }

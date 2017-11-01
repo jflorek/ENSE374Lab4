@@ -24,9 +24,7 @@ public class OrderApplication {
 		System.out.println();
 		System.out.println("Order Contents:");
 		for (Iterator<OrderLine> it = order.getOrderLines(); it.hasNext();) {
-			OrderLine nextLine = it.next();
-			Product currentProduct = nextLine.getProduct();
-			System.out.println(nextLine.getQuantity() + "x " + currentProduct.getName() + "(s): total $" + nextLine.calculatePrice());
+			System.out.println(it.next().getDetails());
 		}
 		System.out.println();
 		System.out.println("Customer '" + order.getCustomer().getName() + "' has discount rating of " + order.getCustomer().getDiscountRating() + ".");
