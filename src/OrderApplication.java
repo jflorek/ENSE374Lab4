@@ -22,7 +22,18 @@ public class OrderApplication {
 		Order order = new Order(customer, 1, new Date());
 		populateOrder(order, catalogue);
 		System.out.println();
+		
 		order.printDetails(System.out);
+		
+		Iterator<OrderLine> allOrderLines = order.getOrderLines();
+		if (allOrderLines.hasNext()) {
+			OrderLine firstOrder = allOrderLines.next();
+			System.out.println("Deleting order line: " + firstOrder.getDetails());
+			order.removeOrderLine(firstOrder);
+			System.out.println("Order line deleted");
+			System.out.println();
+			order.printDetails(System.out);
+		}
 	}
 	
 	public static void populateCatalogue(ProductCatalogue catalogue) {
