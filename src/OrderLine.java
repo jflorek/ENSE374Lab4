@@ -16,6 +16,10 @@ public class OrderLine {
 		return this.quantity;
 	}
 	
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
+	
 	public double calculatePrice() {
 		return getQuantity() * getProduct().getPrice();
 	}

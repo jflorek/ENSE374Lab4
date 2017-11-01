@@ -28,9 +28,19 @@ public class OrderApplication {
 		Iterator<OrderLine> allOrderLines = order.getOrderLines();
 		if (allOrderLines.hasNext()) {
 			OrderLine firstOrder = allOrderLines.next();
+			System.out.println();
 			System.out.println("Deleting order line: " + firstOrder.getDetails());
 			order.removeOrderLine(firstOrder);
 			System.out.println("Order line deleted");
+			System.out.println();
+			order.printDetails(System.out);
+		}
+		allOrderLines = order.getOrderLines();
+		if (allOrderLines.hasNext()) {
+			OrderLine secondOrder = allOrderLines.next();
+			System.out.println();
+			System.out.println("Setting quantity of " + secondOrder.getDetails() + " to 2");
+			secondOrder.setQuantity(2);
 			System.out.println();
 			order.printDetails(System.out);
 		}
