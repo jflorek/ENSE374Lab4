@@ -22,16 +22,28 @@ public class OrderApplication {
 		Order order = new Order(customer, 1, new Date());
 		populateOrder(order, catalogue);
 		System.out.println();
-		System.out.println("Order Contents:");
-		for (Iterator<OrderLine> it = order.getOrderLines(); it.hasNext();) {
-			OrderLine nextLine = it.next();
-			Product currentProduct = nextLine.getProduct();
-			System.out.println(nextLine.getQuantity() + "x " + currentProduct.getName() + "(s): total $" + nextLine.calculatePrice());
+		
+		order.printDetails(System.out);
+		
+		Iterator<OrderLine> allOrderLines = order.getOrderLines();
+		if (allOrderLines.hasNext()) {
+			OrderLine firstOrder = allOrderLines.next();
+			System.out.println();
+			System.out.println("Deleting order line: " + firstOrder.getDetails());
+			order.removeOrderLine(firstOrder);
+			System.out.println("Order line deleted");
+			System.out.println();
+			order.printDetails(System.out);
 		}
-		System.out.println();
-		System.out.println("Customer '" + order.getCustomer().getName() + "' has discount rating of " + order.getCustomer().getDiscountRating() + ".");
-		double finalPrice = order.calculatePrice();
-		System.out.println("Final price: $" + finalPrice);
+		allOrderLines = order.getOrderLines();
+		if (allOrderLines.hasNext()) {
+			OrderLine secondOrder = allOrderLines.next();
+			System.out.println();
+			System.out.println("Setting quantity of " + secondOrder.getDetails() + " to 2");
+			secondOrder.setQuantity(2);
+			System.out.println();
+			order.printDetails(System.out);
+		}
 	}
 	
 	public static void populateCatalogue(ProductCatalogue catalogue) {
